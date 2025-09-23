@@ -1,0 +1,21 @@
+# Ignorar dependencias y builds
+front/node_modules/
+back/node_modules/
+back/dist/
+
+# Archivos sensibles
+**/.env
+*.sqlite
+
+# Angular cache
+front/.angular/cache/
+front/src/environments/
+
+# Logs
+*.log
+
+# IDEs y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

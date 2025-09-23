@@ -1,0 +1,115 @@
+.form-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.candidate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-field {
+  flex: 1;
+}
+
+.file-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.file-input-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-button {
+  white-space: nowrap;
+}
+
+.file-name {
+  color: #666;
+  font-style: italic;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.submit-button, .clear-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+
+
+/* Ocultar errores cuando el campo está enfocado */
+.mat-form-field.mat-focused .mat-error {
+  display: none;
+}
+
+/* Transición suave para mostrar/ocultar errores */
+.mat-error {
+  transition: opacity 0.3s ease;
+}
+
+.mat-form-field:not(.mat-focused) .mat-error {
+  opacity: 1;
+}
+
+.mat-form-field.mat-focused .mat-error {
+  opacity: 0;
+}
+
+
+
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .file-input-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Material overrides */
+mat-card {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+mat-form-field {
+  width: 100%;
+}

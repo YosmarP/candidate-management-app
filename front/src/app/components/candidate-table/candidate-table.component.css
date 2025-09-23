@@ -1,0 +1,129 @@
+.table-container {
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.candidates-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.name-cell, .surname-cell, .years-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.seniority-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+  font-size: 0.8em;
+}
+
+.seniority-badge.senior {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #4caf50;
+}
+
+.seniority-badge.junior {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #2196f3;
+}
+
+.available {
+  color: #4caf50;
+}
+
+.unavailable {
+  color: #f44336;
+}
+
+.available-text {
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.unavailable-text {
+  color: #f44336;
+  font-weight: 500;
+}
+
+.actions-header {
+  text-align: center;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.empty-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.stats {
+  color: #666;
+  font-size: 0.9em;
+  margin-left: 8px;
+}
+
+.candidates-table th.mat-header-cell,
+.candidates-table td.mat-cell,
+.candidates-table th,
+.candidates-table td {
+  display: table-cell !important;
+  padding: 8px;
+  vertical-align: middle;
+}
+
+/* Si hay iconos que empujan, limita su espacio */
+.candidates-table .mat-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .table-container {
+    padding: 10px;
+  }
+  
+  .candidates-table {
+    font-size: 0.9em;
+  }
+  
+  .name-cell, .surname-cell, .years-cell {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+}
+
+/* Material overrides */
+mat-card {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}

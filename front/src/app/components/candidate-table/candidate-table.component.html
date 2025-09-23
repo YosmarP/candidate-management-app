@@ -1,0 +1,103 @@
+<div class="table-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Lista de Candidatos</mat-card-title>
+      <mat-card-subtitle>
+        Total de candidatos: {{dataSource.length}}
+        <span *ngIf="dataSource.length > 0" class="stats">
+          • Senior: {{getSeniorCount()}} • Junior: {{getJuniorCount()}}
+        </span>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="table-wrapper" *ngIf="dataSource.length > 0; else emptyState">
+        <table mat-table [dataSource]="dataSource" class="candidates-table">
+          
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let candidate" class="name-cell">
+              <mat-icon>person</mat-icon>
+              {{ candidate.name }}
+            </td>
+          </ng-container>
+
+          <!-- Surname Column -->
+          <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef>Apellido</th>
+            <td mat-cell *matCellDef="let candidate" class="surname-cell">
+              {{ candidate.surname }}
+            </td>
+          </ng-container>
+
+          <!-- Seniority Column -->
+          <ng-container matColumnDef="seniority">
+            <th mat-header-cell *matHeaderCellDef>Seniority</th>
+            <td mat-cell *matCellDef="let candidate">
+              <span 
+                class="seniority-badge"
+                [class.senior]="candidate.seniority === 'senior'"
+                [class.junior]="candidate.seniority === 'junior'"
+              >
+                {{ candidate.seniority | titlecase }}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Years Column -->
+          <ng-container matColumnDef="yearsOfExperience">
+            <th mat-header-cell *matHeaderCellDef>Años de Experiencia</th>
+            <td mat-cell *matCellDef="let candidate" class="years-cell">
+              <mat-icon>work</mat-icon>
+              {{ candidate.yearsOfExperience }} años
+            </td>
+          </ng-container>
+
+          <!-- Availability Column -->
+          <ng-container matColumnDef="availability">
+            <th mat-header-cell *matHeaderCellDef>Disponibilidad</th>
+            <td mat-cell *matCellDef="let candidate">
+              <mat-icon 
+                [class.available]="candidate.availability"
+                [class.unavailable]="!candidate.availability"
+              >
+                {{ candidate.availability ? 'check_circle' : 'cancel' }}
+              </mat-icon>
+              <span [class.available-text]="candidate.availability" 
+                    [class.unavailable-text]="!candidate.availability">
+                {{ getAvailabilityText(candidate.availability) }}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="actions-header">Acciones</th>
+            <td mat-cell *matCellDef="let candidate" class="actions-cell">
+              <button 
+                mat-icon-button 
+                color="warn" 
+                (click)="deleteCandidate(candidate.id!)"
+                matTooltip="Eliminar candidato"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <ng-template #emptyState>
+        <div class="empty-state">
+          <mat-icon class="empty-icon">group</mat-icon>
+          <h3>No hay candidatos registrados</h3>
+          <p>Comience agregando el primer candidato usando el formulario superior</p>
+        </div>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
