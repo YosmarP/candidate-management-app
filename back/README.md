@@ -18,6 +18,9 @@ npm run test:cov
 npm run test:watch
 
 # Ejecutar tests específicos
+npm test -- app.controller.spec.ts
+npm test -- app.service.spec.ts
 npm test -- candidate.service.spec.ts
 npm test -- candidates.e2e.spec.ts
-npm test -- app.controller.spec.ts
+npm test -- candidate.controller.spec.ts
+npm test -- excel-parser.service.spec.ts
