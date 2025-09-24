@@ -32,7 +32,7 @@ Dentro de `frontend/` y `backend/` encontrarás la estructura típica de cada fr
 
 ### Frontend
 ```bash
-cd frontend
+cd front
 npm install
 npm start       # ng serve
 ```
@@ -40,7 +40,7 @@ Accede en `http://localhost:4200`.
 
 ### Backend
 ```bash
-cd backend
+cd back
 npm install
 npm run start:dev   # arranca Nest en modo desarrollo
 ```
