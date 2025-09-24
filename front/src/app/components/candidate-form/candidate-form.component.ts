@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { excelFileValidator } from 'src/app/validators/excel-file.validator';
 
 @Component({
   selector: 'app-candidate-form',
@@ -40,7 +41,7 @@ export class CandidateFormComponent implements AfterViewInit {
     private candidateService: CandidateService,
     private snackBar: MatSnackBar
   ) {
-    this.candidateForm = this.createForm();
+    this.candidateForm = this.createForm();    
   }
 
   ngAfterViewInit(): void {
@@ -56,7 +57,7 @@ export class CandidateFormComponent implements AfterViewInit {
     return this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       surname: ['', [Validators.required, Validators.minLength(2)]],
-      excelFile: [null, Validators.required]
+      excelFile: [null, [Validators.required, excelFileValidator]]
     });
   }
 
@@ -81,32 +82,12 @@ export class CandidateFormComponent implements AfterViewInit {
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
-    if (file && this.isExcelFile(file)) {
-      this.selectedFile = file;
-      this.candidateForm.patchValue({ excelFile: file });
-      this.candidateForm.get('excelFile')?.setErrors(null);
-      // Marcar el campo como touched para mostrar validación inmediata
-      this.candidateForm.get('excelFile')?.markAsTouched();
-    } else {
-      this.selectedFile = null;
-      this.candidateForm.patchValue({ excelFile: null });
-      this.candidateForm.get('excelFile')?.setErrors({ invalidFile: true });
-      this.candidateForm.get('excelFile')?.markAsTouched();
-      this.showSnackBar('Por favor seleccione un archivo Excel válido (.xlsx, .xls)');
-    }
-  }
-
-  private isExcelFile(file: File): boolean {
-    // Validar tanto por tipo MIME como por extensión del archivo
-    const allowedTypes = [
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'application/vnd.ms-excel'
-    ];
-    const allowedExtensions = ['.xlsx', '.xls'];
+    this.selectedFile = file;
     
-    return allowedTypes.includes(file.type) || 
-           allowedExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
-  }
+    this.candidateForm.patchValue({ excelFile: file });
+    this.candidateForm.get('excelFile')?.markAsTouched();
+    this.candidateForm.get('excelFile')?.updateValueAndValidity();
+  }  
 
   onSubmit(): void {
     if (this.candidateForm.valid && this.selectedFile) {
