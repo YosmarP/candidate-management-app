@@ -10,11 +10,21 @@
         <div class="form-row">
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Nombre</mat-label>
+            <!-- <input 
+              matInput 
+              formControlName="name" 
+              placeholder="Ej: Juan"
+              appAutoFocus
+              #nameInput
+              (focus)="onFieldFocus('name')"
+              (blur)="onFieldBlur('name')"
+            > -->
             <input 
               matInput 
               formControlName="name" 
               placeholder="Ej: Juan"
-              #nameInput
+              appAutoFocus
+              [focusTrigger]="focusTrigger"
               (focus)="onFieldFocus('name')"
               (blur)="onFieldBlur('name')"
             >

@@ -11,7 +11,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+// Importaciones de Validators
 import { excelFileValidator } from 'src/app/validators/excel-file.validator';
+
+// Importaciones de Directivas
+import { AutoFocusDirective } from 'src/app/directives/auto-focus.directive';
 
 @Component({
   selector: 'app-candidate-form',
@@ -26,15 +31,15 @@ import { excelFileValidator } from 'src/app/validators/excel-file.validator';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AutoFocusDirective 
   ]
 })
-export class CandidateFormComponent implements AfterViewInit {
+export class CandidateFormComponent {
   candidateForm: FormGroup;
   selectedFile: File | null = null;
   focusedField: string | null = null;
-
-  @ViewChild('nameInput') nameInput!: ElementRef<HTMLInputElement>;
+  focusTrigger: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -42,15 +47,6 @@ export class CandidateFormComponent implements AfterViewInit {
     private snackBar: MatSnackBar
   ) {
     this.candidateForm = this.createForm();    
-  }
-
-  ngAfterViewInit(): void {
-    // Enfocar automáticamente el campo nombre al cargar el componente
-    setTimeout(() => {
-      if (this.nameInput) {
-        this.nameInput.nativeElement.focus();
-      }
-    }, 100);
   }
 
   private createForm(): FormGroup {
@@ -102,12 +98,7 @@ export class CandidateFormComponent implements AfterViewInit {
           this.onClear();
           this.showSnackBar('Candidato agregado exitosamente!', 'success');
           
-          // Volver a enfocar el campo nombre después de guardar
-          setTimeout(() => {
-            if (this.nameInput) {
-              this.nameInput.nativeElement.focus();
-            }
-          }, 100);
+          this.triggerFocus();
         },
         error: (error) => {
           console.error('Error adding candidate:', error);
@@ -130,12 +121,7 @@ export class CandidateFormComponent implements AfterViewInit {
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
     if (fileInput) fileInput.value = '';
     
-    // Enfocar el campo nombre después de limpiar
-    setTimeout(() => {
-      if (this.nameInput) {
-        this.nameInput.nativeElement.focus();
-      }
-    }, 100);
+    this.triggerFocus();
   }
 
   private markFormGroupTouched(): void {
@@ -159,5 +145,9 @@ export class CandidateFormComponent implements AfterViewInit {
       panelClass: [panelClass],
       verticalPosition: 'top'
     });
+  }
+
+  private triggerFocus(): void {
+    this.focusTrigger = Date.now(); // Cambiar el valor para trigger
   }
 }
