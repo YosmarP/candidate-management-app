@@ -118,7 +118,7 @@ npm test -- candidates.e2e-spec.ts
 
 ---
 
-## Validadores, Directivas y Pipes (Frontend)
+## Validadores, Directivas, Pipes y Interceptors (Frontend)
 
 ### Validadores
 **validator/excel-file.validator.ts** (ubicación: `front/src/app/validators/excel-file.validator.ts`)
@@ -136,6 +136,9 @@ excelFile: [null, [Validators.required, excelFileValidator]]
 
 ### Pipes
 - `titlecase` (Angular built-in) usado para mostrar `seniority` con capitalización.
+
+### Interceptors 
+Se implementó un **interceptor HTTP** para inyectar automáticamente el header `Authorization` en cada petición saliente. Esto facilita autenticación/propagación de tokens sin duplicar código en los servicios HTTP.
 
 ---
 
@@ -174,6 +177,7 @@ f3d4f8c Implementación inicial: aplicación full-stack de gestión de candidato
 - Mejorar cobertura de ramas (branch coverage) en `ExcelParserService`.
 - Añadir tests unitarios en frontend (si se decide Jest para Angular + configuración correcta) o tests con Karma/Jasmine.
 - Paginación y filtros en la tabla de candidatos.
+- Implementar middleware en el backend para recibir y normalizar la cabecera Authorization y exponerla a los controladores
 
 ---
 
