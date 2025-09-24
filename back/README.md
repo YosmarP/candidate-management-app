@@ -20,3 +20,4 @@ npm run test:watch
 # Ejecutar tests específicos
 npm test -- candidate.service.spec.ts
 npm test -- candidates.e2e.spec.ts
+npm test -- app.controller.spec.ts

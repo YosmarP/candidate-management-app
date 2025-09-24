@@ -23,7 +23,7 @@ describe('CandidatesController (e2e)', () => {
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
-        // Proveer una base de datos sqlite en memoria para tests e2e
+        // Base de datos sqlite en memoria para tests e2e
         TypeOrmModule.forRoot({
           type: 'sqlite',
           database: ':memory:',
@@ -67,7 +67,7 @@ describe('CandidatesController (e2e)', () => {
   });
 
   describe('GET /candidates', () => {
-    it('/candidates (GET) - should return empty array initially', async () => {
+    it('/candidates (GET) - debería devolver un array vacío inicialmente', async () => {
       return request(app.getHttpServer())
         .get('/candidates')
         .expect(200)
@@ -76,7 +76,7 @@ describe('CandidatesController (e2e)', () => {
   });
 
   describe('POST /candidates', () => {
-    it('should create a new candidate successfully', async () => {
+    it('debería crear un nuevo candidato correctamente', async () => {
       const candidateData = { name: 'Juan', surname: 'Perez' };
 
       const res = await request(app.getHttpServer())
@@ -95,7 +95,7 @@ describe('CandidatesController (e2e)', () => {
       expect(res.body).toHaveProperty('createdAt');
     });
 
-    it('should return 400 when name is missing', async () => {
+    it('debería devolver 400 cuando falta el nombre', async () => {
       const res = await request(app.getHttpServer())
         .post('/candidates')
         .field('surname', 'Perez')
@@ -105,7 +105,7 @@ describe('CandidatesController (e2e)', () => {
       expect(res.body.message).toContain('El nombre no debe estar vacío');
     });
 
-    it('should return 400 when surname is missing', async () => {
+    it('debería devolver 400 cuando falta el apellido', async () => {
       const res = await request(app.getHttpServer())
         .post('/candidates')
         .field('name', 'Juan')
@@ -115,7 +115,7 @@ describe('CandidatesController (e2e)', () => {
       expect(res.body.message).toContain('El apellido no debe estar vacío');
     });
 
-    it('should return 400 when Excel file is missing', async () => {
+    it('debería devolver 400 cuando falta el archivo Excel', async () => {
       const res = await request(app.getHttpServer())
         .post('/candidates')
         .field('name', 'Juan')
@@ -125,7 +125,7 @@ describe('CandidatesController (e2e)', () => {
       expect(res.body.message).toContain('Archivo inválido');
     });
 
-    it('should return 400 when Excel file is invalid', async () => {
+    it('debería devolver 400 cuando el archivo Excel es inválido', async () => {
       jest.spyOn(excelParserService, 'parseExcel').mockImplementation(() => {
         throw new Error('Invalid Excel file');
       });
@@ -140,7 +140,7 @@ describe('CandidatesController (e2e)', () => {
       expect(res.body.message).toContain('Invalid Excel file');
     });
 
-    it('should return 400 when name is too short', async () => {
+    it('debería devolver 400 cuando el nombre es demasiado corto', async () => {
       const res = await request(app.getHttpServer())
         .post('/candidates')
         .field('name', 'J') // demasiado corto

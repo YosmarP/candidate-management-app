@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Candidate Management API is running!';
+    return '¡La API de Gestión de Candidatos está en ejecución!';
   }
 }
