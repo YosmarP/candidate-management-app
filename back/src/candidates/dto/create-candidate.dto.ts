@@ -7,9 +7,9 @@ export class CreateCandidateDto {
     example: 'John',
     required: true
   })
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
+  @IsString({ message: 'El nombre debe ser una cadena de texto' })
+  @IsNotEmpty({ message: 'El nombre no debe estar vacío' })
+  @MinLength(2, { message: 'El nombre debe tener al menos 2 caracteres' })
   name: string;
 
   @ApiProperty({
@@ -17,9 +17,9 @@ export class CreateCandidateDto {
     example: 'Doe',
     required: true
   })
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
+  @IsString({ message: 'El apellido debe ser una cadena de texto' })
+  @IsNotEmpty({ message: 'El apellido no debe estar vacío' })
+  @MinLength(2, { message: 'El apellido debe tener al menos 2 caracteres' })
   surname: string;
 }
 
