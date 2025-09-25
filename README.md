@@ -5,7 +5,20 @@
 Repositorio: estructura monorepo con `frontend/` y `backend/`.
 
 ---
+## Formato esperado del archivo Excel
 
+El archivo Excel debe contener una hoja con las siguientes columnas:
+
+| Seniority | Years of experience | Availability |
+|-----------|---------------------|--------------|
+| junior    | 5                   | false        |
+
+- **Seniority**: valores permitidos → `junior`, `senior`.
+- **Years of experience**: número entero.
+- **Availability**: booleano (`true` o `false`)
+
+En este repositorio encontrarás un archivo de ejemplo llamado **`candidates.xlsx`**
+---
 ## Resumen del proyecto
 Aplicación para subir candidatos desde un formulario en el frontend (Angular) enviando un Excel de una línea por candidato; el backend (NestJS) procesa el Excel, devuelve el JSON combinado y el frontend lo persiste incrementalmente. La app incluye validadores, directivas y una batería de tests (unitarios + e2e).
 
